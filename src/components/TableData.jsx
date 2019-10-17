@@ -129,6 +129,7 @@ class TableData extends React.Component {
                     </Tooltip>
                 </Row>}
                 onExpand={this.handleExpand}
+                // scroll={{ scrollToFirstRowOnChange: true }}
             >
                 {/* <Column title="ID" dataIndex="id" key="id" width='8%' /> */}
                 <Table.Column title="项目名称" dataIndex="name" key="name" width='13%' filterDropdown={({
