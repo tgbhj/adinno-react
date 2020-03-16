@@ -4,12 +4,12 @@ import Login from '../components/Login'
 import Cookies from 'js-cookie'
 
 function index() {
-    let cook;
+    let cook
 
     if (Cookies.get('name') === undefined) {
-        cook = false;
+        cook = false
     } else {
-        cook = true;
+        cook = true
     }
 
     return cook ? (<TableData />) : (<Login />)

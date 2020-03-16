@@ -1,82 +1,72 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 import { Row, Col, Form, Modal, Input, Button, Select, Tooltip, notification } from 'antd'
+import { EditOutlined } from '@ant-design/icons'
 import fly from 'flyio'
 import qs from 'querystring'
 
-const FormItem = Form.Item;
+function Edit(props = {}) {
+    const [visible, setVisible] = useState(false)
 
-function hasErrors(fieldsError) {
-    return Object.keys(fieldsError).some(field => fieldsError[field]);
-}
-
-class EditForm extends React.Component {
-    state = {
-        visible: false
-    }
-
-    handleSubmit = (e) => {
-        e.preventDefault();
-        this.props.form.validateFieldsAndScroll((err, values) => {
-            if (!err) {
-                fly
-                    .post('/tasks/update/'+ this.props.id +'/', qs.stringify({
-                        name: this.props.form.getFieldValue('name'),
-                        manager: this.props.form.getFieldValue('manager')
-                    }))
-                    .then(res => {
-                        if (res.data.status === 1) {
-                            window.location.reload()
-                        } else {
-                            notification.error({
-                                message: '修改失败',
-                                description: res.data.reason,
-                                duration: 2
-                            })
-                        }
-                    }).catch(err => {
-                        console.log(err)
+    const onFinish = async values => {
+        await fly
+            .post('/tasks/update/' + props.id + '/', qs.stringify({
+                name: values.name,
+                manager: values.manager
+            }))
+            .then(res => {
+                if (res.data.status === 1) {
+                    notification.success({
+                        message: '修改成功',
+                        description: '',
+                        duration: 2
                     })
-            }
-        })
-    };
-
-    render() {
-        return <Fragment>
-            <Tooltip placement="bottom" title="修改项目" arrowPointAtCenter>
-                <Button disabled={this.state.visible} onClick={() => this.setState({ visible: true })} type="primary" icon='edit' />
-            </Tooltip>
-            <Modal visible={this.state.visible} footer={null} onCancel={() => this.setState({ visible: false })}>
-                <Row type="flex" justify="center" align="middle">
-                    <Col xs={24} sm={12} md={12} lg={12} xl={12} xxl={12}>
-                        <Form onSubmit={this.handleSubmit}>
-                            <FormItem>
-                                {this.props.form.getFieldDecorator('name')(
-                                    <Input placeholder="项目名称" allowClear/>
-                                )}
-                            </FormItem>
-                            <FormItem>
-                                {this.props.form.getFieldDecorator('manager')(
-                                    <Select placeholder="项目负责人" allowClear>
-                                        {
-                                            this.props.users.map(item => {
-                                                return <Select.Option key={item[0]}>{item[1]}</Select.Option>
-                                            })
-                                        }
-                                    </Select>
-                                )}
-                            </FormItem>
-                            <FormItem>
-                                <Button type="primary" block htmlType="submit"
-                                    disabled={hasErrors(this.props.form.getFieldsError())}>修 改</Button>
-                            </FormItem>
-                        </Form>
-                    </Col>
-                </Row>
-            </Modal>
-        </Fragment>
+                    setTimeout(() => {
+                        window.location.reload()
+                    }, 2000)
+                } else {
+                    notification.error({
+                        message: '修改失败',
+                        description: res.data.reason,
+                        duration: 2
+                    })
+                }
+            }).catch(err => {
+                notification.error({
+                    message: 'Error',
+                    description: err,
+                    duration: 2
+                })
+            })
     }
-}
 
-const Edit = Form.create()(EditForm);
+    return <Fragment>
+        <Tooltip placement="bottom" title="修改项目" arrowPointAtCenter>
+            <Button disabled={visible} onClick={() => setVisible(true)} type="primary" icon={<EditOutlined />} />
+        </Tooltip>
+        <Modal visible={visible} footer={null} onCancel={() => setVisible(false)}>
+            <Row type="flex" justify="center" align="middle">
+                <Col xs={24} sm={12} md={12} lg={12} xl={12} xxl={12}>
+                    <Form onFinish={onFinish}>
+                        <Form.Item name='name'>
+                            <Input placeholder="项目名称" allowClear />
+                        </Form.Item>
+                        <Form.Item name='manager'>
+                            <Select placeholder="项目负责人" allowClear>
+                                {
+                                    props.users.map(item => {
+                                        return <Select.Option key={item[0]}>{item[1]}</Select.Option>
+                                    })
+                                }
+                            </Select>
+                        </Form.Item>
+                        <Form.Item>
+                            <Button type="primary" block htmlType="submit">修 改</Button>
+                        </Form.Item>
+                    </Form>
+                </Col>
+            </Row>
+        </Modal>
+    </Fragment>
+}
 
 export default Edit

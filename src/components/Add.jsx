@@ -1,116 +1,94 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 import { Row, Col, Form, Modal, Input, Button, Select, Tooltip, notification } from 'antd'
+import { PlusOutlined } from '@ant-design/icons'
 import fly from 'flyio'
 import qs from 'querystring'
 
-const FormItem = Form.Item;
+function Add(props = {}) {
+    const [visible, setVisble] = useState(false)
 
-function hasErrors(fieldsError) {
-    return Object.keys(fieldsError).some(field => fieldsError[field]);
-}
-
-class AddForm extends React.Component {
-    state = {
-        visible: false
-    }
-
-    handleSubmit = (e) => {
-        e.preventDefault();
-        this.props.form.validateFieldsAndScroll((err, values) => {
-            if (!err) {
-                fly
-                    .post('/tasks/add/', qs.stringify({
-                        name: this.props.form.getFieldValue('name'),
-                        manager: this.props.form.getFieldValue('manager'),
-                        members: this.props.form.getFieldValue('members'),
-                        progress: this.props.form.getFieldValue('progress')
-                    }))
-                    .then(res => {
-                        if (res.data.status === 1) {
-                            window.location.reload()
-                        } else {
-                            notification.error({
-                                message: '添加失败',
-                                description: res.data.reason,
-                                duration: 2
-                            })
-                        }
-                    }).catch(err => {
-                        console.log(err)
+    const onFinish = async values => {
+        await fly
+            .post('/tasks/add/', qs.stringify({
+                name: values.name,
+                manager: values.manager,
+                members: values.members,
+                progress: values.progress
+            }))
+            .then(res => {
+                if (res.data.status === 1) {
+                    notification.success({
+                        message: '添加成功',
+                        description: '',
+                        duration: 2
                     })
-            }
-        })
-    };
-
-    render() {
-        return <Fragment>
-            <Tooltip placement="bottom" title="添加项目" arrowPointAtCenter>
-                <div style={{float: "left", marginLeft: 15}}><Button disabled={this.state.visible} onClick={() => this.setState({ visible: true })} type="primary" icon='plus' /></div>
-            </Tooltip>
-            <Modal visible={this.state.visible} footer={null} onCancel={() => this.setState({ visible: false })}>
-                <Row type="flex" justify="center" align="middle">
-                    <Col xs={24} sm={12} md={12} lg={12} xl={12} xxl={12}>
-                        <Form onSubmit={this.handleSubmit}>
-                            <FormItem>
-                                {this.props.form.getFieldDecorator('name', {
-                                    rules: [{
-                                        required: true, message: '项目名称不能为空'
-                                    }]
-                                })(
-                                    <Input placeholder="项目名称" allowClear/>
-                                )}
-                            </FormItem>
-                            <FormItem>
-                                {this.props.form.getFieldDecorator('manager', {
-                                    rules: [{
-                                        required: true, message: '项目负责人不能为空'
-                                    }]
-                                })(
-                                    <Select placeholder="项目负责人" allowClear>
-                                        {
-                                            this.props.users.map(item => {
-                                                return <Select.Option key={item[0]}>{item[1]}</Select.Option>
-                                            })
-                                        }
-                                    </Select>
-                                )}
-                            </FormItem>
-                            <FormItem>
-                                {this.props.form.getFieldDecorator('members', {
-                                    rules: [{
-                                        required: true, message: '项目参与人不能为空'
-                                    }]
-                                })(
-                                    <Select mode="multiple" placeholder="项目参与人" allowClear>
-                                        {
-                                            this.props.users.map(item => {
-                                                return <Select.Option key={item[0]}>{item[1]}</Select.Option>
-                                            })
-                                        }
-                                    </Select>
-                                )}
-                            </FormItem>
-                            <FormItem>
-                                {this.props.form.getFieldDecorator('progress', {
-                                    rules: [{
-                                        required: true, message: '项目进度不能为空'
-                                    }]
-                                })(
-                                    <Input.TextArea autosize placeholder="项目进度" />
-                                )}
-                            </FormItem>
-                            <FormItem>
-                                <Button type="primary" block htmlType="submit"
-                                    disabled={hasErrors(this.props.form.getFieldsError())}>保 存</Button>
-                            </FormItem>
-                        </Form>
-                    </Col>
-                </Row>
-            </Modal>
-        </Fragment>
+                    setTimeout(() => {
+                        window.location.reload()
+                    }, 2000)
+                } else {
+                    notification.error({
+                        message: '添加失败',
+                        description: res.data.reason,
+                        duration: 2
+                    })
+                }
+            }).catch(err => {
+                notification.error({
+                    message: 'Error',
+                    description: err,
+                    duration: 2
+                })
+            })
     }
-}
 
-const Add = Form.create()(AddForm);
+    return <Fragment>
+        <Tooltip placement="bottom" title="添加项目" arrowPointAtCenter>
+            <div style={{ float: "left", marginLeft: 15, marginBottom: 15 }}><Button disabled={visible} onClick={() => setVisble(true)} type="primary" icon={<PlusOutlined />} /></div>
+        </Tooltip>
+        <Modal visible={visible} footer={null} onCancel={() => setVisble(false)}>
+            <Row type="flex" justify="center" align="middle">
+                <Col xs={24} sm={24} md={24} lg={12} xl={12} xxl={12}>
+                    <Form onFinish={onFinish}>
+                        <Form.Item name='name' rules={[{
+                            required: true, message: '项目名称不能为空'
+                        }]}>
+                            <Input placeholder="项目名称" allowClear />
+                        </Form.Item>
+                        <Form.Item name='manager' rules={[{
+                            required: true, message: '项目负责人不能为空'
+                        }]}>
+                            <Select placeholder="项目负责人" allowClear>
+                                {
+                                    props.users.map(item => {
+                                        return <Select.Option key={item[0]}>{item[1]}</Select.Option>
+                                    })
+                                }
+                            </Select>
+                        </Form.Item>
+                        <Form.Item name='members' rules={[{
+                            required: true, message: '项目参与人不能为空'
+                        }]}>
+                            <Select mode="multiple" placeholder="项目参与人" allowClear>
+                                {
+                                    props.users.map(item => {
+                                        return <Select.Option key={item[0]}>{item[1]}</Select.Option>
+                                    })
+                                }
+                            </Select>
+                        </Form.Item>
+                        <Form.Item name='progress' rules={[{
+                            required: true, message: '项目进度不能为空'
+                        }]}>
+                            <Input.TextArea autoSize placeholder="项目进度" allowClear />
+                        </Form.Item>
+                        <Form.Item>
+                            <Button type="primary" block htmlType="submit">保 存</Button>
+                        </Form.Item>
+                    </Form>
+                </Col>
+            </Row>
+        </Modal>
+    </Fragment>
+}
 
 export default Add
