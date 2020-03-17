@@ -197,8 +197,8 @@ function TableData() {
                             <Button onClick={() => handleReset(clearFilters)} size="small" style={{ width: 90 }}>重置</Button>
                         </div>
                     )}
-                    filterIcon={filtered => (
-                        <SearchOutlined style={{ color: filtered ? "#1890ff" : undefined }} />
+                    filterIcon={() => (
+                        <SearchOutlined />
                     )}
                     onFilter={(value, record) =>
                         record.name
