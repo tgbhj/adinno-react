@@ -56,12 +56,12 @@ function Password() {
                         <Form.Item name='password' rules={[{
                             required: true, message: '原密码不能为空'
                         }]}>
-                            <Input type='password' autoComplete="true" placeholder="原密码" allowClear />
+                            <Input.Password autoComplete="true" placeholder="原密码" allowClear />
                         </Form.Item>
                         <Form.Item name='new' rules={[{
                             required: true, message: '新密码不能为空'
                         }]}>
-                            <Input type='password' autoComplete="true" placeholder="新密码" allowClear />
+                            <Input.Password autoComplete="true" placeholder="新密码" allowClear />
                         </Form.Item>
                         <Form.Item>
                             <Button type="primary" block htmlType="submit">提 交</Button>

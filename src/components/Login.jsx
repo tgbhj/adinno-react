@@ -62,7 +62,7 @@ function Login() {
                             <Form.Item name='password' rules={[{
                                 required: true, whitespace: true, message: '密码不能为空'
                             }]}>
-                                <Input allowClear autoComplete="true" type="password" placeholder="密码" />
+                                <Input.Password allowClear autoComplete="true" placeholder="密码" />
                             </Form.Item>
                             <Form.Item>
                                 <Password />
