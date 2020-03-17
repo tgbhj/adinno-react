@@ -184,7 +184,7 @@ function TableData() {
                 }) => (
                         <div style={{ padding: 8 }}>
                             <ErrorBoundary>
-                                <Input.Search
+                                <Input
                                     ref={node => { setSearchInput(node) }}
                                     placeholder="项目搜索"
                                     value={selectedKeys[0]}
@@ -193,7 +193,7 @@ function TableData() {
                                     style={{ width: 188, marginBottom: 8, display: "block" }}
                                 />
                             </ErrorBoundary>
-                            <Button type="primary" onClick={() => handleSearch(selectedKeys, confirm)} icon={<SearchOutlined />} size="small" style={{ width: 90, marginRight: 8 }}>搜索</Button>
+                            <Button type="primary" onClick={() => handleSearch(selectedKeys, confirm)} size="small" style={{ width: 90, marginRight: 8 }}>搜索</Button>
                             <Button onClick={() => handleReset(clearFilters)} size="small" style={{ width: 90 }}>重置</Button>
                         </div>
                     )}
