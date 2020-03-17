@@ -164,9 +164,9 @@ function TableData() {
                         </Timeline>
                     </ErrorBoundary>}
                 title={() => <Fragment>
-                    <MyContext.Provider>
+                    <MyContext.Provider value={{ users: users }}>
                         <ErrorBoundary>
-                            <Add users={users} dataSource={dataSource} />
+                            <Add />
                         </ErrorBoundary>
                     </MyContext.Provider>
                     <Tooltip placement="bottom" title="登出" arrowPointAtCenter>
@@ -219,9 +219,9 @@ function TableData() {
                                 }
                             </Col>
                             <Col span={2}>
-                                <MyContext.Provider>
+                                <MyContext.Provider value={{ id: record.id, members: record.members, users: users }}>
                                     <ErrorBoundary>
-                                        <Members id={record.id} members={record.members} users={users} />
+                                        <Members />
                                     </ErrorBoundary>
                                 </MyContext.Provider>
                             </Col>
@@ -237,9 +237,9 @@ function TableData() {
                                 </Typography.Paragraph>
                             </Col>
                             <Col span={2}>
-                                <MyContext.Provider>
+                                <MyContext.Provider value={{ id: record.id }}>
                                     <ErrorBoundary>
-                                        <Progress id={record.id} />
+                                        <Progress />
                                     </ErrorBoundary>
                                 </MyContext.Provider>
                             </Col>
@@ -261,9 +261,9 @@ function TableData() {
                 <Table.Column title="操作" dataIndex="option" key="option" width='9%' render={(text, record) => {
                     return dataSource.length >= 1 ? (
                         <Fragment>
-                            <MyContext.Provider>
+                            <MyContext.Provider value={{ users: users, id: record.id }}>
                                 <ErrorBoundary>
-                                    <Edit users={users} id={record.id} dataSource={dataSource} />
+                                    <Edit />
                                 </ErrorBoundary>
                             </MyContext.Provider>
                             <Divider type="vertical" />

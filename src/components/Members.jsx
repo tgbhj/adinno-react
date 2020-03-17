@@ -1,14 +1,16 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useState, useContext } from 'react'
 import { Row, Col, Form, Modal, Button, Tooltip, notification, Select } from 'antd'
 import { PlusCircleOutlined } from '@ant-design/icons'
 import fly from 'flyio'
 import qs from 'querystring'
+import { MyContext } from '../context-manager'
 
-function Members(props = {}) {
+function Members() {
     const [visible, setVisible] = useState(false)
+    const data = useContext(MyContext)
 
     const onFinish = async values => {
-        const a = props.members
+        const a = data.members
         const b = values.members
 
         //a与b不重复的部分
@@ -57,7 +59,7 @@ function Members(props = {}) {
         var add = inBNotInA(a, b)
 
         await fly
-            .post('/tasks/members/' + props.id + '/', qs.stringify({
+            .post('/tasks/members/' + data.id + '/', qs.stringify({
                 add: add,
                 del: del
             }))
@@ -97,9 +99,9 @@ function Members(props = {}) {
                 <Col xs={24} sm={12} md={12} lg={12} xl={12} xxl={12}>
                     <Form onFinish={onFinish}>
                         <Form.Item name='members'>
-                            <Select allowClear mode="multiple" placeholder="项目参与人" value={props.members}>
+                            <Select allowClear mode="multiple" placeholder="项目参与人" value={data.members}>
                                 {
-                                    props.users.map(item => {
+                                    data.users.map(item => {
                                         return <Select.Option key={item[1]}>{item[1]}</Select.Option>
                                     })
                                 }

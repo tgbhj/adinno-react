@@ -1,11 +1,13 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useState, useContext } from 'react'
 import { Row, Col, Form, Modal, Input, Button, Select, Tooltip, notification } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 import fly from 'flyio'
 import qs from 'querystring'
+import { MyContext } from '../context-manager'
 
-function Add(props = {}) {
+function Add() {
     const [visible, setVisble] = useState(false)
+    const data = useContext(MyContext)
 
     const onFinish = async values => {
         await fly
@@ -59,7 +61,7 @@ function Add(props = {}) {
                         }]}>
                             <Select placeholder="项目负责人" allowClear>
                                 {
-                                    props.users.map(item => {
+                                    data.users.map(item => {
                                         return <Select.Option key={item[0]}>{item[1]}</Select.Option>
                                     })
                                 }
@@ -70,7 +72,7 @@ function Add(props = {}) {
                         }]}>
                             <Select mode="multiple" placeholder="项目参与人" allowClear>
                                 {
-                                    props.users.map(item => {
+                                    data.users.map(item => {
                                         return <Select.Option key={item[0]}>{item[1]}</Select.Option>
                                     })
                                 }

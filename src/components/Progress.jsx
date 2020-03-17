@@ -1,15 +1,17 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useState, useContext } from 'react'
 import { Row, Col, Form, Modal, Input, Button, Tooltip, notification } from 'antd'
 import { PlusCircleOutlined } from '@ant-design/icons'
 import fly from 'flyio'
 import qs from 'querystring'
+import { MyContext } from '../context-manager'
 
-function Progress(props = {}) {
+function Progress() {
     const [visible, setVisible] = useState(false)
+    const data = useContext(MyContext)
 
     const onFinish = async values => {
         await fly
-            .post('/tasks/progress/' + props.id + '/', qs.stringify({
+            .post('/tasks/progress/' + data.id + '/', qs.stringify({
                 progress: values.progress
             }))
             .then(res => {

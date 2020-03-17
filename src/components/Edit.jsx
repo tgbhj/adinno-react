@@ -1,15 +1,17 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useState, useContext } from 'react'
 import { Row, Col, Form, Modal, Input, Button, Select, Tooltip, notification } from 'antd'
 import { EditOutlined } from '@ant-design/icons'
 import fly from 'flyio'
 import qs from 'querystring'
+import { MyContext } from '../context-manager'
 
-function Edit(props = {}) {
+function Edit() {
     const [visible, setVisible] = useState(false)
+    const data = useContext(MyContext)
 
     const onFinish = async values => {
         await fly
-            .post('/tasks/update/' + props.id + '/', qs.stringify({
+            .post('/tasks/update/' + data.id + '/', qs.stringify({
                 name: values.name,
                 manager: values.manager
             }))
@@ -53,7 +55,7 @@ function Edit(props = {}) {
                         <Form.Item name='manager'>
                             <Select placeholder="项目负责人" allowClear>
                                 {
-                                    props.users.map(item => {
+                                    data.users.map(item => {
                                         return <Select.Option key={item[0]}>{item[1]}</Select.Option>
                                     })
                                 }
