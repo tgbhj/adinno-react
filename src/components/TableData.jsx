@@ -76,14 +76,14 @@ function TableData() {
             })
     }
 
-    const handleSearch = (selectedKeys, confirm) => {
-        confirm()
-        setSearchText(selectedKeys[0])
+    const handleSearch = async (selectedKeys, confirm) => {
+        await confirm()
+        await setSearchText(selectedKeys[0])
     }
 
-    const handleReset = clearFilters => {
-        clearFilters()
-        setSearchText('')
+    const handleReset = async clearFilters => {
+        await clearFilters()
+        await setSearchText('')
     }
 
     const handleDelete = async row => {
