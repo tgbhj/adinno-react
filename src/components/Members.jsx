@@ -3,7 +3,7 @@ import { Row, Col, Form, Modal, Button, Tooltip, notification, Select } from 'an
 import { PlusCircleOutlined } from '@ant-design/icons'
 import fly from 'flyio'
 import qs from 'querystring'
-import { MyContext } from '../context-manager'
+import { MyContext } from './TableData'
 
 function Members() {
     const [visible, setVisible] = useState(false)

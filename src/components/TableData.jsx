@@ -8,8 +8,9 @@ import Progress from './Progress'
 import Members from './Members'
 import moment from 'moment'
 import Cookies from 'js-cookie'
-import { MyContext } from '../context-manager'
 import ErrorBoundary from './ErrorBoundary'
+
+export const MyContext = React.createContext(null)
 
 function TableData() {
     const [dataSource, setDataSource] = useState([])

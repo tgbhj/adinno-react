@@ -3,7 +3,7 @@ import { Row, Col, Form, Modal, Input, Button, Select, Tooltip, notification } f
 import { PlusOutlined } from '@ant-design/icons'
 import fly from 'flyio'
 import qs from 'querystring'
-import { MyContext } from '../context-manager'
+import { MyContext } from './TableData'
 
 function Add() {
     const [visible, setVisble] = useState(false)

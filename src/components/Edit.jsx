@@ -3,7 +3,7 @@ import { Row, Col, Form, Modal, Input, Button, Select, Tooltip, notification } f
 import { EditOutlined } from '@ant-design/icons'
 import fly from 'flyio'
 import qs from 'querystring'
-import { MyContext } from '../context-manager'
+import { MyContext } from './TableData'
 
 function Edit() {
     const [visible, setVisible] = useState(false)
