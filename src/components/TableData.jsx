@@ -121,7 +121,7 @@ function TableData() {
         await fly
             .get('/tasks/progresses/' + record.id + '/')
             .then(res => {
-                setPregress(res.data.progress);
+                setPregress(res.data.progress)
             })
             .catch(err => {
                 notification.error({
