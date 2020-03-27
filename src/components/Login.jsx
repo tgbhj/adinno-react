@@ -51,7 +51,7 @@ function Login() {
                 <Row type="flex" justify="center" align="middle">
                     <Col xs={22} sm={12} md={12} lg={12} xl={12} xxl={12}>
                         <Form onFinish={onFinish}>
-                            <div style={{ margin: '0 auto', textAlign: 'center' }}>
+                            <div style={{ margin: 'auto', textAlign: 'center' }}>
                                 <p style={{ marginTop: 20, fontSize: 20, fontWeight: 600 }}>登 录</p>
                             </div>
                             <Form.Item name='username' rules={[{
