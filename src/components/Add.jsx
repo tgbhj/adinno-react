@@ -45,7 +45,9 @@ function Add() {
 
     return <Fragment>
         <Tooltip placement="bottom" title="添加项目" arrowPointAtCenter>
-            <div style={{ float: "left", marginLeft: 15, marginBottom: 15 }}><Button disabled={visible} onClick={() => setVisble(true)} type="primary" icon={<PlusOutlined />} /></div>
+            <div style={{ float: "left", marginLeft: 15, marginBottom: 15 }}>
+                <Button disabled={visible} onClick={() => setVisble(true)} type="primary" icon={<PlusOutlined />} />
+            </div>
         </Tooltip>
         <Modal visible={visible} footer={null} onCancel={() => setVisble(false)}>
             <Row type="flex" justify="center" align="middle">
