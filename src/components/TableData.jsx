@@ -177,7 +177,7 @@ function TableData() {
                 onExpand={handleExpand}
                 scroll={{ scrollToFirstRowOnChange: true }}
             >
-                <Table.Column title="项目名称" dataIndex="name" key="name" width='13%' filterDropdown={({
+                <Table.Column title="项目名称" dataIndex="name" width='13%' filterDropdown={({
                     setSelectedKeys,
                     selectedKeys,
                     confirm,
@@ -205,9 +205,9 @@ function TableData() {
                             .toLowerCase()
                             .includes(value.toLowerCase())
                     } />
-                <Table.Column title="项目负责人" dataIndex="manager" key="manager" width='10%' filters={filters} onFilter={(value, record) => record.manager.includes(value)} />
+                <Table.Column title="项目负责人" dataIndex="manager" width='10%' filters={filters} onFilter={(value, record) => record.manager.includes(value)} />
             )} />
-            <Table.Column title="项目参与人" dataIndex="members" key="members" width='14%' render={(text, record) => (
+            <Table.Column title="项目参与人" dataIndex="members" width='14%' render={(text, record) => (
                     <Fragment>
                         <Row>
                             <Col span={20}>
@@ -227,7 +227,7 @@ function TableData() {
                         </Row>
                     </Fragment>
                 )} />
-                <Table.Column title="项目进度" dataIndex="progress" key="progress" render={(text, record) => (
+                <Table.Column title="项目进度" dataIndex="progress" render={(text, record) => (
                     <Fragment>
                         <Row>
                             <Col span={22}>
@@ -245,7 +245,7 @@ function TableData() {
                         </Row>
                     </Fragment>
                 )} />
-                <Table.Column title="项目进度修改人/修改时间" dataIndex="submitter" key="submitter" width='15%' render={(text, record) => (
+                <Table.Column title="项目进度修改人/修改时间" dataIndex="submitter" width='15%' render={(text, record) => (
                     <Fragment>
                         <Row>
                             <Col>
@@ -257,7 +257,7 @@ function TableData() {
                         </Row>
                     </Fragment>
                 )} />
-                <Table.Column title="操作" dataIndex="option" key="option" width='9%' render={(text, record) => {
+                <Table.Column title="操作" dataIndex="option" width='9%' render={(text, record) => {
                     return dataSource.length >= 1 ? (
                         <Fragment>
                             <MyContext.Provider value={{ users: users, id: record.id }}>
