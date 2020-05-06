@@ -26,8 +26,6 @@ const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
 // makes for a smoother build process.
 const shouldInlineRuntimeChunk = process.env.INLINE_RUNTIME_CHUNK !== 'false';
 
-const imageInlineSizeLimit = parseInt(process.env.IMAGE_INLINE_SIZE_LIMIT || '10000');
-
 // style files regexes
 const cssRegex = /\.css$/;
 const cssModuleRegex = /\.module\.css$/;
@@ -36,7 +34,7 @@ const sassModuleRegex = /\.module\.(scss|sass)$/;
 
 // This is the production and development configuration.
 // It is focused on developer experience, fast rebuilds, and a minimal bundle.
-module.exports = function (webpackEnv) {
+module.exports = webpackEnv => {
   const isEnvDevelopment = webpackEnv === 'development';
   const isEnvProduction = webpackEnv === 'production';
 
@@ -289,24 +287,16 @@ module.exports = function (webpackEnv) {
       strictExportPresence: true,
       rules: [
         // Disable require.ensure as it's not a standard language feature.
-        { parser: { requireEnsure: false } },
-
+        {
+          parser: {
+            requireEnsure: false
+          }
+        },
         {
           // "oneOf" will traverse all following loaders until one will
           // match the requirements. When no loader matches it will fall
           // back to the "file" loader at the end of the loader list.
           oneOf: [
-            // "url" loader works like "file" loader except that it embeds assets
-            // smaller than specified limit in bytes as data URLs to avoid requests.
-            // A missing `test` is equivalent to a match.
-            {
-              test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-              loader: require.resolve('url-loader'),
-              options: {
-                limit: imageInlineSizeLimit,
-                name: 'static/media/[name].[hash:8].[ext]'
-              }
-            },
             // Process application JS with Babel.
             // The preset includes JSX, Flow, TypeScript, and some ESnext features.
             {
@@ -315,7 +305,6 @@ module.exports = function (webpackEnv) {
               loader: require.resolve('babel-loader'),
               options: {
                 customize: require.resolve('babel-preset-react-app/webpack-overrides'),
-
                 plugins: [
                   [
                     require.resolve('babel-plugin-named-asset-import'),
@@ -364,7 +353,6 @@ module.exports = function (webpackEnv) {
                 cacheDirectory: true,
                 // See #6846 for context on why cacheCompression is disabled
                 cacheCompression: false,
-
                 // Babel sourcemaps are needed for debugging into node_modules
                 // code.  Without the options below, debuggers like VSCode
                 // show incorrect code and set breakpoints on the wrong lines.

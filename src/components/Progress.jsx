@@ -42,7 +42,7 @@ function Progress() {
 
     return <Fragment>
         <Tooltip placement="bottom" title="更新进度" arrowPointAtCenter>
-            <Button disabled={visible} onClick={() => setVisible(true)} type="primary" icon={<PlusCircleOutlined />} />
+            <Button onClick={() => setVisible(true)} type="primary" icon={<PlusCircleOutlined />} />
         </Tooltip>
         <Modal visible={visible} footer={null} onCancel={() => setVisible(false)}>
             <Row type="flex" justify="center" align="middle">

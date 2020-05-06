@@ -92,7 +92,7 @@ function Members() {
 
     return <Fragment>
         <Tooltip placement="bottom" title="修改参与人" arrowPointAtCenter>
-            <Button disabled={visible} onClick={() => setVisible(true)} type="primary" icon={<PlusCircleOutlined />} />
+            <Button onClick={() => setVisible(true)} type="primary" icon={<PlusCircleOutlined />} />
         </Tooltip>
         <Modal visible={visible} footer={null} onCancel={() => setVisible(false)}>
             <Row type="flex" justify="center" align="middle">
