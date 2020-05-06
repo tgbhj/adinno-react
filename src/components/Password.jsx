@@ -43,7 +43,7 @@ function Password() {
         <a onClick={() => setVisible(true)} type="primary">修改密码</a>
         <Modal visible={visible} footer={null} onCancel={() => setVisible(false)}>
             <Row type="flex" justify="center" align="middle">
-                <Col xs={24} sm={12} md={12} lg={12} xl={12} xxl={12}>
+                <Col xs={22} sm={22} md={22} lg={12} xl={12} xxl={12}>
                     <Form onFinish={onFinish}>
                         <div style={{ margin: 'auto', textAlign: 'center' }}>
                             <p style={{ marginTop: 20, fontSize: 20, fontWeight: 600 }}>修改密码</p>

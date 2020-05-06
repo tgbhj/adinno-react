@@ -96,7 +96,7 @@ function Members() {
         </Tooltip>
         <Modal visible={visible} footer={null} onCancel={() => setVisible(false)}>
             <Row type="flex" justify="center" align="middle">
-                <Col xs={24} sm={12} md={12} lg={12} xl={12} xxl={12}>
+                <Col xs={22} sm={22} md={22} lg={12} xl={12} xxl={12}>
                     <Form onFinish={onFinish}>
                         <Form.Item name='members'>
                             <Select allowClear mode="multiple" placeholder="项目参与人" value={data.members}>

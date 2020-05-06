@@ -4,7 +4,7 @@ import { ConfigProvider } from 'antd'
 import zhCN from 'antd/es/locale/zh_CN'
 import index from '../views/index'
 
-const Routers = () => (
+const Routers = () =>
     <ConfigProvider locale={zhCN}>
         <Router>
             <Switch>
@@ -12,6 +12,6 @@ const Routers = () => (
             </Switch>
         </Router>
     </ConfigProvider>
-);
+
 
 export default Routers

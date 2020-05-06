@@ -46,13 +46,13 @@ function Login() {
     }, [])
 
     return <Row type="flex" justify="center" align="middle" style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, margin: 'auto' }}>
-        <Col xs={24} sm={24} md={24} lg={8} xl={8} xxl={8}>
+        <Col xs={22} sm={22} md={22} lg={8} xl={8} xxl={8}>
             <Card bodyStyle={{ padding: 0 }} style={{ boxShadow: '0 0 10px #888888' }} bordered={false}>
                 <Row type="flex" justify="center" align="middle">
-                    <Col xs={22} sm={12} md={12} lg={12} xl={12} xxl={12}>
+                    <Col xs={22} sm={22} md={22} lg={12} xl={12} xxl={12}>
                         <Form onFinish={onFinish}>
-                            <div style={{ margin: 'auto', textAlign: 'center' }}>
-                                <p style={{ marginTop: 20, fontSize: 20, fontWeight: 600 }}>登 录</p>
+                            <div style={{ margin: 'auto', textAlign: 'center', fontWeight: 600 }}>
+                                <p style={{ marginTop: 20, fontSize: 20 }}>登 录</p>
                             </div>
                             <Form.Item name='username' rules={[{
                                 required: true, message: '用户名不能为空'

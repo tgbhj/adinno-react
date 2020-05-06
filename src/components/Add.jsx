@@ -51,7 +51,7 @@ function Add() {
         </Tooltip>
         <Modal visible={visible} footer={null} onCancel={() => setVisble(false)}>
             <Row type="flex" justify="center" align="middle">
-                <Col xs={24} sm={24} md={24} lg={12} xl={12} xxl={12}>
+                <Col xs={22} sm={22} md={22} lg={12} xl={12} xxl={12}>
                     <Form onFinish={onFinish}>
                         <Form.Item name='name' rules={[{
                             required: true, message: '项目名称不能为空'
