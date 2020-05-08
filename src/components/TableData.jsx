@@ -45,10 +45,10 @@ function TableData() {
             .then(res => {
                 setDataSource(res.data.tasks)
             })
-            .catch(err => {
+            .catch(() => {
                 notification.error({
                     message: 'Error',
-                    description: err,
+                    description: 'Server Error',
                     duration: 2
                 })
             })
@@ -68,10 +68,10 @@ function TableData() {
                 }
                 setFilters(fil)
             })
-            .catch(err => {
+            .catch(() => {
                 notification.error({
                     message: 'Error',
-                    description: err,
+                    description: 'Server Error',
                     duration: 2
                 })
             })
@@ -108,10 +108,10 @@ function TableData() {
                     })
                 }
             })
-            .catch(err => {
+            .catch(() => {
                 notification.error({
                     message: 'Error',
-                    description: err,
+                    description: 'Server Error',
                     duration: 2
                 })
             })
@@ -123,10 +123,10 @@ function TableData() {
             .then(res => {
                 setPregress(res.data.progress)
             })
-            .catch(err => {
+            .catch(() => {
                 notification.error({
                     message: 'Error',
-                    description: err,
+                    description: 'Server Error',
                     duration: 2
                 })
             })
@@ -139,10 +139,10 @@ function TableData() {
                 Cookies.remove('name', { path: '/', domain: document.domain })
                 window.location.reload()
             })
-            .catch(err => {
+            .catch(() => {
                 notification.error({
                     message: 'Error',
-                    description: err,
+                    description: 'Server Error',
                     duration: 2
                 })
             })

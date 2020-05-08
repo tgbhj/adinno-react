@@ -16,10 +16,10 @@ function Members() {
         //a与b不重复的部分
         function inANotInB(a, b) {
             const obj = new Object()
-            for (let i = 0, len = a.length; i < len; i++) {
+            for (let i = 0; i < a.length; i++) {
                 obj[a[i]] = 1
             }
-            for (let i = 0, len = b.length; i < len; i++) {
+            for (let i = 0; i < b.length; i++) {
                 if (obj.hasOwnProperty(b[i])) {
                     obj[b[i]] = undefined
                 }
@@ -37,10 +37,10 @@ function Members() {
         //b与a不重复的部分
         function inBNotInA(a, b) {
             const obj = new Object()
-            for (let i = 0, len = b.length; i < len; i++) {
+            for (let i = 0; i < b.length; i++) {
                 obj[b[i]] = 1
             }
-            for (let i = 0, len = a.length; i < len; i++) {
+            for (let i = 0; i < a.length; i++) {
                 if (obj.hasOwnProperty(a[i])) {
                     obj[a[i]] = undefined
                 }
@@ -80,10 +80,10 @@ function Members() {
                         duration: 2
                     })
                 }
-            }).catch(err => {
+            }).catch(() => {
                 notification.error({
                     message: 'Error',
-                    description: err,
+                    description: 'Server Error',
                     duration: 2
                 })
             })

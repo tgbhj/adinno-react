@@ -30,10 +30,10 @@ function Login() {
                     })
                 }
             })
-            .catch(err => {
+            .catch(() => {
                 notification.error({
                     message: 'Error',
-                    description: err,
+                    description: 'Server Error',
                     duration: 2
                 })
             })
