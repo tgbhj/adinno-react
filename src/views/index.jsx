@@ -12,7 +12,7 @@ function index() {
         cook = true
     }
 
-    return cook ? (<TableData />) : (<Login />)
+    return cook ? <TableData /> : <Login />
 }
 
 export default index
